@@ -1,3 +1,2 @@
 # easy-form
-
-Describe easy-form here.
+install: npm i easy-form-manager
