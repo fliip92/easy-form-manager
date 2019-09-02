@@ -1,6 +1,6 @@
 {
   "name": "easy-form-manager",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Describe easy-form here",
   "private": false,
   "main": "build/index.js",
