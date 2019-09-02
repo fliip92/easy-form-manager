@@ -3,7 +3,7 @@ _Simple, Fast, MobX-State-Tree powered form manager [Live Demo](https://easy-for
 
 # Contents
 -   [Installation](#installation)
--   [Getting Started](docs/getting-started.md)
+-   [Getting Started](#getting-started)
 -   [Examples](#examples)
 -   [Api overview](#api-overview)
 
