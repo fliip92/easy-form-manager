@@ -25,24 +25,50 @@ const fieldStore = types
     }
   }));
 
+  function getAllElementsWithAttribute(attribute, value)
+  {
+    var allElements = document.getElementsByTagName('*');
+    for (var i = 0, n = allElements.length; i < n; i++)
+    {
+      if (allElements[i].getAttribute(attribute) === value)
+      {
+        // Element exists with attribute. Add to array.
+        return allElements[i]
+      }
+    }
+  }
+
+
 export const formStore = types
   .model("formStore", {
     fields: types.optional(types.map(fieldStore), {}),
     sending: types.optional(types.boolean, false)
   })
   .actions(self => ({
+    setValue(key, value){
+      self.fields.get(key).handleValue(value)
+    },
     addListeners() {
       let keys = Array.from(self.fields.keys());
       keys.map(key => {
-        let element = document.getElementById(key)
-        self.fields.get(key).addType(element.type);
-        element.addEventListener("change", function (e) {
-          self.fields.get(key).handleValue(e.target.value);
-        });
+        let element = getAllElementsWithAttribute("fieldid", key)
+        if (element) {
+          self.fields.get(key).addType(element.type);
+          element.addEventListener("change", function (e) {
+            self.fields.get(key).handleValue(e.target.value);
+          });
+        }
       });
     }
   }))
   .views(self => ({
+    getConditionalRenderStuatus(condition){
+      if(condition(self.Values.keyValue)){
+        return "block"
+      }else{
+        return "none"
+      }
+    },
     getFieldValue(key) {
       return self.fields.get(key).value
     },
